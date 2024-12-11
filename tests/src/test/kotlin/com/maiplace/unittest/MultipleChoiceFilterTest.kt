@@ -1,7 +1,6 @@
 package com.maiplace.unittest
 
 import com.maiplace.MultipleChoiceFilter
-import com.maiplace.NotFilter
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Test
 import java.time.DayOfWeek.MONDAY
@@ -26,6 +25,6 @@ class MultipleChoiceFilterTest {
 
     @Test
     fun `Not Filter`() {
-        assert(NotFilter(MultipleChoiceFilter.weekend()) isMetBy LocalDate.parse("2024-12-10"))
+        assert(!(MultipleChoiceFilter.weekend()) isMetBy LocalDate.parse("2024-12-10"))
     }
 }
