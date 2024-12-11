@@ -5,6 +5,7 @@ import java.time.DayOfWeek.SATURDAY
 import java.time.DayOfWeek.SUNDAY
 import java.time.LocalDate
 
+// Understands a constraint with fixed choices
 abstract class MultipleChoiceFilter: Filter {
     abstract override infix fun isMetBy(date: LocalDate): Boolean
 
