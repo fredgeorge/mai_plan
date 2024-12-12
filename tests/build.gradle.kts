@@ -27,6 +27,8 @@ dependencies {
     // Use the Kotlin JDK 8 standard library.
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0")
 
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.1")
+
     // Jupiter using JUnit 5
     testImplementation(platform("org.junit:junit-bom:5.9.2"))
 	testImplementation("org.junit.jupiter:junit-jupiter:5.9.2")

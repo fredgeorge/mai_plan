@@ -24,4 +24,6 @@ dependencies {
 
     // Use the Kotlin JDK 8 standard library.
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.1")
 }
