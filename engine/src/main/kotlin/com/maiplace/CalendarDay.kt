@@ -8,7 +8,7 @@ class CalendarDay(
     start: LocalTime = LocalTime(4, 0),
     end: LocalTime = LocalTime(0, 0)
 ) {
-    private val timeSlots = listOf(TimeSlot(start, end))
+    private val availableTimeSlots = listOf(TimeSlot(start, end))
 
     constructor(
         dateString: String,
@@ -17,5 +17,5 @@ class CalendarDay(
     ): this(LocalDate.parse(dateString), start, end)
 
     fun timeSlots(filter: Filter = Filter.TrueFilter) =
-        if (filter isMetBy date) timeSlots else emptyList()
+        if (filter isMetBy date) availableTimeSlots else emptyList()
 }
