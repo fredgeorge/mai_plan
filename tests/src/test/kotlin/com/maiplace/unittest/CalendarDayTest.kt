@@ -17,4 +17,9 @@ class CalendarDayTest {
         assertEquals(timeSlots(4, 0), CalendarDay("2024-12-10").timeSlots())
         assertEquals(timeSlots(7, 21), CalendarDay("2024-12-10", time(7), time(21)).timeSlots())
     }
+
+    @Test
+    fun appointments () {
+        CalendarDay("2024-12-10", time(4), time(23)).book(timeSlot(10, 12))
+    }
 }

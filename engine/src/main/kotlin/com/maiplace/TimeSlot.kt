@@ -13,4 +13,10 @@ class TimeSlot(private val start: LocalTime, private val end: LocalTime) {
             this.end == other.end -> listOf(TimeSlot(this.start, other.start))
             else -> listOf(TimeSlot(this.start, other.start), TimeSlot(other.end, this.end))
         }
+    companion object {
+        internal fun List<TimeSlot>.availableTimeSlot(timeSlot: TimeSlot) =
+            this.first { availableSlot -> timeSlot in availableSlot }
+    }
+
+    operator fun contains(other: TimeSlot) = this.start <= other.start && this.end >= other.end
 }

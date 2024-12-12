@@ -1,5 +1,6 @@
 package com.maiplace
 
+import com.maiplace.TimeSlot.Companion.availableTimeSlot
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
 
@@ -18,4 +19,6 @@ class CalendarDay(
 
     fun timeSlots(filter: Filter = Filter.TrueFilter) =
         if (filter isMetBy date) availableTimeSlots else emptyList()
+
+    fun book(timeSlot: TimeSlot) = Appointment(availableTimeSlots.availableTimeSlot(timeSlot))
 }
