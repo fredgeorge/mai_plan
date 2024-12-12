@@ -13,7 +13,7 @@ class TimeSlot(private val start: CalendarTime, private val end: CalendarTime) {
         }
     companion object {
         internal fun List<TimeSlot>.availableTimeSlot(timeSlot: TimeSlot) =
-            this.first { availableSlot -> timeSlot in availableSlot }
+            this.firstOrNull { availableSlot -> timeSlot in availableSlot }?:throw IllegalArgumentException("No available Time Slot")
     }
 
     operator fun contains(other: TimeSlot) = this.start <= other.start && this.end >= other.end
@@ -21,4 +21,6 @@ class TimeSlot(private val start: CalendarTime, private val end: CalendarTime) {
     init {
         require(start < end) {"End must be after Start"}
     }
+
+    override fun toString() = "From $start to $end"
 }

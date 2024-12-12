@@ -1,8 +1,12 @@
 package com.maiplace.unittest
 
-import com.maiplace.*
+import com.maiplace.AM
+import com.maiplace.CalendarDay
+import com.maiplace.DayFilter
+import com.maiplace.TimeSlot
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 
 class CalendarDayTest {
@@ -18,6 +22,12 @@ class CalendarDayTest {
 
     @Test
     fun appointments () {
-        CalendarDay("2024-12-10", 4.AM, 12.PM).book(timeSlot(10, 12))
+        CalendarDay("2024-12-10", 4.AM, 12.AM).also{
+            it.book(timeSlot(10, 12))
+            assertThrows<IllegalArgumentException> { it.book(timeSlot(10, 12)) }
+            assertEquals(2, it.timeSlots().size)
+            it.book(timeSlot(13, 14))
+            assertEquals(3, it.timeSlots().size)
+        }
     }
 }

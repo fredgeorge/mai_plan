@@ -17,6 +17,10 @@ data class CalendarTime(private val hour: Int, private val minute: Int = 0) {
             if (it != 0) it
             else this.minute.compareTo(other.minute)
         }
+
+    override fun toString(): String {
+        return "$hour:$minute"
+    }
 }
 
 val Number.AM: CalendarTime
