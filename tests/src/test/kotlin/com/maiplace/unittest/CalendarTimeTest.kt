@@ -2,6 +2,8 @@ package com.maiplace.unittest
 
 import com.maiplace.AM
 import com.maiplace.CalendarTime
+import com.maiplace.CalendarTime.Companion.MIDNIGHT
+import com.maiplace.CalendarTime.Companion.NOON
 import com.maiplace.PM
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -20,6 +22,8 @@ class CalendarTimeTest {
         assertEquals(CalendarTime(11, 30), 11.30.AM)
         assertEquals(CalendarTime(24, 0), 12.AM)
         assertEquals(CalendarTime(12, 0), 12.PM)
+        assertEquals(CalendarTime(12, 0), NOON)
+        assertEquals(CalendarTime(24, 0), MIDNIGHT)
     }
 
     @Test

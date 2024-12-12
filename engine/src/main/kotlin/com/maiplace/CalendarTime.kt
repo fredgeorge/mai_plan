@@ -8,6 +8,10 @@ data class CalendarTime(private val hour: Int, private val minute: Int = 0) {
         require(minute in 0..59) {"Illegal Minute"}
         if(hour == 24) require(minute == 0) {"Illegal time past midnight"}
     }
+    companion object {
+        val NOON = 12.PM
+        val MIDNIGHT = 12.AM
+    }
     operator fun compareTo(other: CalendarTime) =
         this.hour.compareTo(other.hour).let {
             if (it != 0) it
