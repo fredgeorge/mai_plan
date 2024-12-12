@@ -8,6 +8,9 @@ class CalendarDay(private val date: LocalDate) {
         private val defaultStart = LocalTime(4, 0)
         private val defaultEnd = LocalTime(0, 0)
     }
+
+    constructor(dateString: String): this(LocalDate.parse(dateString))
+
     fun timeSlots(filter: Filter = Filter.TrueFilter) =
         if (filter isMetBy date) listOf(TimeSlot(defaultStart, defaultEnd)) else emptyList()
 }
