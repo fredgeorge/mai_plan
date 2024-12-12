@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Test
 import java.time.DayOfWeek.MONDAY
 import java.time.DayOfWeek.TUESDAY
+import java.time.DayOfWeek.WEDNESDAY
 import java.time.LocalDate
 
 class MultipleChoiceFilterTest {
@@ -12,6 +13,7 @@ class MultipleChoiceFilterTest {
     @Test
     fun `Day Of Week`() {
         assert(MultipleChoiceFilter.daysOfWeek(TUESDAY) isMetBy LocalDate.parse("2024-12-10"))
+        assert(MultipleChoiceFilter.daysOfWeek(TUESDAY, WEDNESDAY) isMetBy LocalDate.parse("2024-12-10"))
         assertFalse(MultipleChoiceFilter.daysOfWeek(MONDAY) isMetBy LocalDate.parse("2024-12-10"))
     }
 

@@ -10,16 +10,12 @@ abstract class MultipleChoiceFilter: Filter {
     abstract override infix fun isMetBy(date: LocalDate): Boolean
 
     companion object {
-        fun daysOfWeek(dayOfWeek: DayOfWeek): MultipleChoiceFilter = DayOfWeekFilter(dayOfWeek)
-        fun weekend(): Filter = WeekendFilter()
-        fun weekday(): Filter = NotFilter(WeekendFilter())
+        fun daysOfWeek(dayOfWeek: DayOfWeek, vararg days: DayOfWeek): MultipleChoiceFilter = DayOfWeekFilter(listOf(dayOfWeek) + days)
+        fun weekend(): Filter = daysOfWeek(SATURDAY, SUNDAY)
+        fun weekday(): Filter = NotFilter(weekend())
     }
 }
 
-internal class DayOfWeekFilter(private val dayOfWeek: DayOfWeek): MultipleChoiceFilter() {
-    override fun isMetBy(date: LocalDate) = date.dayOfWeek == dayOfWeek
-}
-
-internal class WeekendFilter(): MultipleChoiceFilter() {
-    override fun isMetBy(date: LocalDate) = date.dayOfWeek == SATURDAY || date.dayOfWeek == SUNDAY
+internal class DayOfWeekFilter(private val days: List<DayOfWeek>): MultipleChoiceFilter() {
+    override fun isMetBy(date: LocalDate) = date.dayOfWeek in days
 }
