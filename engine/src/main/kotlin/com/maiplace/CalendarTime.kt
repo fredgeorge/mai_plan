@@ -1,5 +1,7 @@
 package com.maiplace
 
+import kotlin.math.roundToInt
+
 data class CalendarTime(private val hour: Int, private val minute: Int = 0) {
     init {
         require(hour in 0..24) {"Illegal Hour"}
@@ -13,5 +15,5 @@ data class CalendarTime(private val hour: Int, private val minute: Int = 0) {
         }
 }
 
-val Int.PM get()= CalendarTime(this+12)
-val Int.AM get() = CalendarTime(this)
+val Number.AM get() = CalendarTime(this.toDouble().roundToInt(), ((this.toDouble() - this.toDouble().roundToInt()) * 100).roundToInt())
+val Number.PM get() = CalendarTime(this.toDouble().roundToInt() + 12, ((this.toDouble() - this.toDouble().roundToInt()) * 100).roundToInt())

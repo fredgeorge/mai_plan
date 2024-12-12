@@ -16,6 +16,8 @@ class CalendarTimeTest {
         assert(CalendarTime(11) != CalendarTime(10))
         assertEquals(CalendarTime(11), 11.AM)
         assertEquals(CalendarTime(23), 11.PM)
+        assertEquals(CalendarTime(23, 30), 11.30.PM)
+        assertEquals(CalendarTime(11, 30), 11.30.AM)
     }
 
     @Test
@@ -25,5 +27,6 @@ class CalendarTimeTest {
         assertThrows<IllegalArgumentException> { CalendarTime(10, 60) }
         assertThrows<IllegalArgumentException> { CalendarTime(10, -1) }
         assertThrows<IllegalArgumentException> { CalendarTime(25) }
+        assertThrows<IllegalArgumentException> { 11.60.PM }
     }
 }
