@@ -4,6 +4,7 @@ import com.maiplace.TimeSlot
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class TimeSlotTest {
 
@@ -25,6 +26,11 @@ class TimeSlotTest {
         assertEquals(emptyList<TimeSlot>(), timeSlot(10, 12).block(timeSlot(10, 12)))
         assertEquals(listOf(timeSlot(11, 12)), timeSlot(10, 12).block(timeSlot(10, 11)))
         assertEquals(listOf(timeSlot(10, 11)), timeSlot(10, 12).block(timeSlot(11, 12)))
-        assertEquals(listOf(timeSlot(4, 10), timeSlot(12, 0)), timeSlot(4, 0).block(timeSlot(10, 12)))
+        assertEquals(listOf(timeSlot(4, 10), timeSlot(12, 24)), timeSlot(4, 24).block(timeSlot(10, 12)))
+    }
+
+    @Test
+    fun validate() {
+        assertThrows<IllegalArgumentException> { timeSlot(4, 0) }
     }
 }

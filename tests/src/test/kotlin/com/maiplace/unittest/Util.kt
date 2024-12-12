@@ -1,13 +1,12 @@
 package com.maiplace.unittest
 
+import com.maiplace.CalendarTime
 import com.maiplace.TimeSlot
-import kotlinx.datetime.LocalTime
-
 
 internal fun timeSlot(startHour: Int, endHour: Int) =
-    TimeSlot(LocalTime(startHour, 0), LocalTime(endHour, 0))
+    TimeSlot(CalendarTime(startHour), CalendarTime(endHour))
 
 internal fun timeSlots(startHour: Int, endHour: Int) =
-    listOf(TimeSlot(LocalTime(startHour, 0), LocalTime(endHour, 0)))
+    listOf(timeSlot(startHour, endHour))
 
-internal fun time(hour: Int, minute: Int = 0) = LocalTime(hour, minute)
+internal fun time(hour: Int, minute: Int = 0) = CalendarTime(hour, minute)

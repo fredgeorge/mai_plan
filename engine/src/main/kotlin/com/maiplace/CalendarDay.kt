@@ -2,19 +2,18 @@ package com.maiplace
 
 import com.maiplace.TimeSlot.Companion.availableTimeSlot
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.LocalTime
 
 class CalendarDay(
     private val date: LocalDate,
-    start: LocalTime = LocalTime(4, 0),
-    end: LocalTime = LocalTime(0, 0)
+    start: CalendarTime = 4.AM,
+    end: CalendarTime = 12.PM
 ) {
     private val availableTimeSlots = listOf(TimeSlot(start, end))
 
     constructor(
         dateString: String,
-        start: LocalTime = LocalTime(4, 0),
-        end: LocalTime = LocalTime(0, 0)
+        start: CalendarTime = 4.AM,
+        end: CalendarTime = 12.PM
     ): this(LocalDate.parse(dateString), start, end)
 
     fun timeSlots(filter: Filter = Filter.TrueFilter) =
