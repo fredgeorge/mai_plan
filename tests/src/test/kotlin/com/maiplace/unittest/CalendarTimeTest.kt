@@ -18,6 +18,8 @@ class CalendarTimeTest {
         assertEquals(CalendarTime(23), 11.PM)
         assertEquals(CalendarTime(23, 30), 11.30.PM)
         assertEquals(CalendarTime(11, 30), 11.30.AM)
+        assertEquals(CalendarTime(24, 0), 12.AM)
+        assertEquals(CalendarTime(12, 0), 12.PM)
     }
 
     @Test

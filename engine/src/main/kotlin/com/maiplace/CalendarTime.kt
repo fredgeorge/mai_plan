@@ -15,5 +15,15 @@ data class CalendarTime(private val hour: Int, private val minute: Int = 0) {
         }
 }
 
-val Number.AM get() = CalendarTime(this.toDouble().roundToInt(), ((this.toDouble() - this.toDouble().roundToInt()) * 100).roundToInt())
-val Number.PM get() = CalendarTime(this.toDouble().roundToInt() + 12, ((this.toDouble() - this.toDouble().roundToInt()) * 100).roundToInt())
+val Number.AM: CalendarTime
+    get() {
+        val hour = this.toDouble().roundToInt()
+        val minute = ((this.toDouble() - hour) * 100).roundToInt()
+        return CalendarTime(hour + (if(hour == 12)12 else 0), minute)
+    }
+val Number.PM: CalendarTime
+    get() {
+        val hour = this.toDouble().roundToInt()
+        val minute = ((this.toDouble() - hour) * 100).roundToInt()
+        return CalendarTime(hour + (if(hour == 12)0 else 12), minute)
+    }

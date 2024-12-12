@@ -6,14 +6,14 @@ import kotlinx.datetime.LocalDate
 class CalendarDay(
     private val date: LocalDate,
     start: CalendarTime = 4.AM,
-    end: CalendarTime = 12.PM
+    end: CalendarTime = 12.AM
 ) {
     private val availableTimeSlots = listOf(TimeSlot(start, end))
 
     constructor(
         dateString: String,
         start: CalendarTime = 4.AM,
-        end: CalendarTime = 12.PM
+        end: CalendarTime = 12.AM
     ): this(LocalDate.parse(dateString), start, end)
 
     fun timeSlots(filter: Filter = Filter.TrueFilter) =

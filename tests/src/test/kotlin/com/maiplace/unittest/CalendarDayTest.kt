@@ -1,8 +1,6 @@
 package com.maiplace.unittest
 
-import com.maiplace.CalendarDay
-import com.maiplace.DayFilter
-import com.maiplace.TimeSlot
+import com.maiplace.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -20,6 +18,6 @@ class CalendarDayTest {
 
     @Test
     fun appointments () {
-        CalendarDay("2024-12-10", time(4), time(23)).book(timeSlot(10, 12))
+        CalendarDay("2024-12-10", 4.AM, 12.PM).book(timeSlot(10, 12))
     }
 }
