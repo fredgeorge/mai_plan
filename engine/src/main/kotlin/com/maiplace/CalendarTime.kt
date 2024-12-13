@@ -2,7 +2,7 @@ package com.maiplace
 
 import kotlin.math.roundToInt
 
-data class CalendarTime(private val hour: Int, private val minute: Int = 0) {
+data class CalendarTime(private val hour: Int, private val minute: Int = 0) : Comparable<CalendarTime> {
     init {
         require(hour in 0..24) {"Illegal Hour"}
         require(minute in 0..59) {"Illegal Minute"}
@@ -12,7 +12,7 @@ data class CalendarTime(private val hour: Int, private val minute: Int = 0) {
         val NOON = 12.PM
         val MIDNIGHT = 12.AM
     }
-    operator fun compareTo(other: CalendarTime) =
+    override operator fun compareTo(other: CalendarTime) =
         this.hour.compareTo(other.hour).let {
             if (it != 0) it
             else this.minute.compareTo(other.minute)

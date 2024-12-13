@@ -12,7 +12,7 @@ import org.junit.jupiter.api.assertThrows
 class CalendarDayTest {
 
     @Test
-    fun `Time Slots` () {
+    fun `Time Slots`() {
         assertEquals(timeSlots(4, 24), CalendarDay("2024-12-10").timeSlots(DayFilter.weekday()))
         assertEquals(emptyList<TimeSlot>(), CalendarDay("2024-12-07").timeSlots(DayFilter.weekday()))
         assertEquals(timeSlots(4, 24), CalendarDay("2024-12-10").timeSlots())
@@ -21,13 +21,28 @@ class CalendarDayTest {
     }
 
     @Test
-    fun appointments () {
-        CalendarDay("2024-12-10", 4.AM, 12.AM).also{
+    fun appointments() {
+        CalendarDay("2024-12-10", 4.AM, 12.AM).also {
             it.book(timeSlot(10, 12))
+            assertEquals(1, it.appointments().size)
             assertThrows<IllegalArgumentException> { it.book(timeSlot(10, 12)) }
             assertEquals(2, it.timeSlots().size)
             it.book(timeSlot(13, 14))
             assertEquals(3, it.timeSlots().size)
+            assertEquals(2, it.appointments().size)
+        }
+    }
+
+    @Test
+    fun `cancel appointment`() {
+        CalendarDay("2024-12-10", 4.AM, 12.AM).also { day ->
+            day.book(timeSlot(10, 12)).also { appointment ->
+                assertEquals(1, day.appointments().size)
+                assertEquals(2, day.timeSlots().size)
+                appointment.cancel()
+                assertEquals(0, day.appointments().size)
+                assertEquals(1, day.timeSlots().size)
+            }
         }
     }
 }
