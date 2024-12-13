@@ -34,7 +34,7 @@ class CalendarDayTest {
     }
 
     @Test
-    fun `cancel appointment`() {
+    fun `cancel only appointment`() {
         CalendarDay("2024-12-10", 4.AM, 12.AM).also { day ->
             day.book(timeSlot(10, 12)).also { appointment ->
                 assertEquals(1, day.appointments().size)
@@ -42,6 +42,19 @@ class CalendarDayTest {
                 appointment.cancel()
                 assertEquals(0, day.appointments().size)
                 assertEquals(1, day.timeSlots().size)
+            }
+        }
+    }
+    @Test
+    fun `cancel one appointment`() {
+        CalendarDay("2024-12-10", 4.AM, 12.AM).also { day ->
+            day.book(timeSlot(10, 11))
+            day.book(timeSlot(11, 12)).also { appointment ->
+                assertEquals(2, day.appointments().size)
+                assertEquals(2, day.timeSlots().size)
+                appointment.cancel()
+                assertEquals(1, day.appointments().size)
+                assertEquals(2, day.timeSlots().size)
             }
         }
     }
