@@ -47,13 +47,17 @@ class CalendarDay(
             fun weekday(): Filter = daysOfWeek(MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY)
         }
         override fun availableSlots(day: CalendarDay): List<TimeSlot> = if(day.date.dayOfWeek in days) day.availableTimeSlots else emptyList()
+        override val precedence = 5
     }
+
     class TimeFilter(private val timeSlot: TimeSlot): Filter {
         override fun availableSlots(day: CalendarDay) =
             day.availableTimeSlots.mapNotNull { it intersection timeSlot }
-
+        override val precedence = 10
     }
+
     object NullFilter: Filter {
         override fun availableSlots(day: CalendarDay): List<TimeSlot> = day.availableTimeSlots
+        override val precedence = 0
     }
 }
