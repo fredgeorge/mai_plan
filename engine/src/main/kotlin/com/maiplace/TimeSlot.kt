@@ -41,4 +41,9 @@ class TimeSlot(private val start: CalendarTime, private val end: CalendarTime) {
     }
 
     override fun toString() = "From $start to $end"
+    infix fun intersection(other: TimeSlot): TimeSlot? {
+        val start = listOf(this.start, other.start).max()
+        val end = listOf(this.end, other.end).min()
+        return if(start < end) TimeSlot(start, end) else null
+    }
 }

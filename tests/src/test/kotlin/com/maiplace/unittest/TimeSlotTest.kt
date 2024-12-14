@@ -1,8 +1,7 @@
 package com.maiplace.unittest
 
 import com.maiplace.TimeSlot
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotEquals
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -32,5 +31,12 @@ class TimeSlotTest {
     @Test
     fun validate() {
         assertThrows<IllegalArgumentException> { timeSlot(4, 0) }
+    }
+
+    @Test
+    fun intersection() {
+        assertEquals(timeSlot(9, 10), timeSlot(4, 10) intersection timeSlot(9, 15))
+        assertEquals(timeSlot(9, 10), timeSlot(9, 10) intersection timeSlot(8, 15))
+        assertNull(timeSlot(9, 10) intersection timeSlot(10, 15))
     }
 }

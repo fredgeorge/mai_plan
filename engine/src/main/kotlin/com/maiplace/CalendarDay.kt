@@ -48,10 +48,9 @@ class CalendarDay(
         }
         override fun availableSlots(day: CalendarDay): List<TimeSlot> = if(day.date.dayOfWeek in days) day.availableTimeSlots else emptyList()
     }
-    class TimeFilter(private val start: CalendarTime, private val end: CalendarTime): Filter {
-        override fun availableSlots(day: CalendarDay): List<TimeSlot> {
-            TODO("Not yet implemented")
-        }
+    class TimeFilter(private val timeSlot: TimeSlot): Filter {
+        override fun availableSlots(day: CalendarDay) =
+            day.availableTimeSlots.mapNotNull { it intersection timeSlot }
 
     }
     object NullFilter: Filter {
