@@ -3,6 +3,8 @@ package com.maiplace
 import com.maiplace.TimeSlot.Companion.availableTimeSlot
 import com.maiplace.TimeSlot.Companion.consolidate
 import kotlinx.datetime.LocalDate
+import java.time.DayOfWeek
+import java.time.DayOfWeek.*
 
 class CalendarDay(
     private val date: LocalDate,
@@ -18,8 +20,7 @@ class CalendarDay(
         end: CalendarTime = 12.AM
     ): this(LocalDate.parse(dateString), start, end)
 
-    fun timeSlots(filter: Filter = Filter.TrueFilter) =
-        if (filter isMetBy date) availableTimeSlots else emptyList()
+    fun timeSlots(filter: Filter = NullFilter) = filter.availableSlots(this)
 
     fun book(timeSlot: TimeSlot): Appointment {
         availableTimeSlots.availableTimeSlot(timeSlot).also { selectedTimeSlot ->
@@ -36,5 +37,24 @@ class CalendarDay(
     fun remove(appointment: Appointment, timeSlot: TimeSlot) {
         appointments.remove(appointment)
         availableTimeSlots.add(timeSlot).also { availableTimeSlots.consolidate() }
+    }
+    // Understands a constraint with fixed choices
+    class DayFilter private constructor(private val days: List<DayOfWeek>): Filter {
+
+        companion object {
+            fun daysOfWeek(dayOfWeek: DayOfWeek, vararg days: DayOfWeek): DayFilter = DayFilter(listOf(dayOfWeek) + days)
+            fun weekend(): Filter = daysOfWeek(SATURDAY, SUNDAY)
+            fun weekday(): Filter = daysOfWeek(MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY)
+        }
+        override fun availableSlots(day: CalendarDay): List<TimeSlot> = if(day.date.dayOfWeek in days) day.availableTimeSlots else emptyList()
+    }
+    class TimeFilter(private val start: CalendarTime, private val end: CalendarTime): Filter {
+        override fun availableSlots(day: CalendarDay): List<TimeSlot> {
+            TODO("Not yet implemented")
+        }
+
+    }
+    object NullFilter: Filter {
+        override fun availableSlots(day: CalendarDay): List<TimeSlot> = day.availableTimeSlots
     }
 }

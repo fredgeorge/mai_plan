@@ -2,7 +2,7 @@ package com.maiplace.unittest
 
 import com.maiplace.AM
 import com.maiplace.CalendarDay
-import com.maiplace.DayFilter
+import com.maiplace.CalendarDay.DayFilter
 import com.maiplace.TimeSlot
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -45,6 +45,7 @@ class CalendarDayTest {
             }
         }
     }
+
     @Test
     fun `cancel one appointment`() {
         CalendarDay("2024-12-10", 4.AM, 12.AM).also { day ->
